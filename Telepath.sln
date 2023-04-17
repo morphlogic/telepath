@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telepath.Core", "Telepath.Core\Telepath.Core.csproj", "{E6FB58EE-6D47-4236-9AF9-B73454E64050}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telepath.DataAccess", "Telepath.DataAccess\Telepath.DataAccess.csproj", "{04A167C6-3FE0-4E0E-B358-4B4C5D0DF39F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telepath.Api", "Telepath.Api\Telepath.Api.csproj", "{018EEA6A-CEA3-489D-BE12-66482D82287D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telepath.Web", "Telepath.Web\Telepath.Web.csproj", "{D3D7359E-00D6-40B2-BA31-C754410ADEBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telepath.Worker", "Telepath.Worker\Telepath.Worker.csproj", "{F1F988E5-D219-4A8B-A651-D55F9803D257}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telepath.Tests", "Telepath.Tests\Telepath.Tests.csproj", "{0F7858B9-543D-462E-B3B8-F4AC70F7A8A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6FB58EE-6D47-4236-9AF9-B73454E64050}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6FB58EE-6D47-4236-9AF9-B73454E64050}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6FB58EE-6D47-4236-9AF9-B73454E64050}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6FB58EE-6D47-4236-9AF9-B73454E64050}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04A167C6-3FE0-4E0E-B358-4B4C5D0DF39F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04A167C6-3FE0-4E0E-B358-4B4C5D0DF39F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04A167C6-3FE0-4E0E-B358-4B4C5D0DF39F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04A167C6-3FE0-4E0E-B358-4B4C5D0DF39F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{018EEA6A-CEA3-489D-BE12-66482D82287D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{018EEA6A-CEA3-489D-BE12-66482D82287D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{018EEA6A-CEA3-489D-BE12-66482D82287D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{018EEA6A-CEA3-489D-BE12-66482D82287D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3D7359E-00D6-40B2-BA31-C754410ADEBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3D7359E-00D6-40B2-BA31-C754410ADEBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3D7359E-00D6-40B2-BA31-C754410ADEBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3D7359E-00D6-40B2-BA31-C754410ADEBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1F988E5-D219-4A8B-A651-D55F9803D257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1F988E5-D219-4A8B-A651-D55F9803D257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1F988E5-D219-4A8B-A651-D55F9803D257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1F988E5-D219-4A8B-A651-D55F9803D257}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F7858B9-543D-462E-B3B8-F4AC70F7A8A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F7858B9-543D-462E-B3B8-F4AC70F7A8A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F7858B9-543D-462E-B3B8-F4AC70F7A8A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F7858B9-543D-462E-B3B8-F4AC70F7A8A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FB6F6CA-DBEA-45CD-A397-26422C2E2AE1}
+	EndGlobalSection
+EndGlobal
