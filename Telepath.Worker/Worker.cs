@@ -1,10 +1,12 @@
+using ILogger = Serilog.ILogger;
+
 namespace Morphware.Telepath.Worker
 {
     public class Worker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
+        private readonly ILogger _logger;
 
-        public Worker(ILogger<Worker> logger)
+        public Worker(ILogger logger)
         {
             _logger = logger;
         }
@@ -13,7 +15,7 @@ namespace Morphware.Telepath.Worker
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+                _logger.Information("Worker running at: {time}", DateTimeOffset.Now);
                 await Task.Delay(1000, stoppingToken);
             }
         }
