@@ -1,2 +1,4 @@
 # telepath
 Telepath is a distributed application for assistance in the investigation of potentially paranormal phenomena, specifically extrasensory perception. It allows members in a group to submit thoughts at specific times, after which Telepath identifies commonly conceived thoughts as candidates for further study in the context of telepathy.
+
+Members belong to one or more ThinkGroups and submit Thoughts each pertaining to a particular Topic along with a time at which the thought occurred. Reports are generated regularly and on an ad hoc basis to highlight temporal and subjective commonalities between thoughts between Members of a ThinkGroup.
