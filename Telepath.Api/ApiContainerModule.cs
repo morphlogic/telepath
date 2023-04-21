@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Morphware.Telepath.DataAccess;
 
 namespace Morphware.Telepath.Api
 {
@@ -6,6 +7,7 @@ namespace Morphware.Telepath.Api
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.Register(c => new TelepathContext());
             //  TODO:   register components
         }
     }
