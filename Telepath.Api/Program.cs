@@ -2,6 +2,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutofacSerilogIntegration;
 using Morphware.Telepath.Api;
+using Morphware.Telepath.DataAccess;
 using Serilog;
 
 var configurationBuilder = new ConfigurationBuilder();
@@ -20,7 +21,8 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {   
     builder.RegisterLogger();
-    builder.RegisterModule(new ApiContainerModule(configuration));
+    builder.RegisterModule(new ApiContainerModule());
+    builder.RegisterModule(new DataAccessContainerModule(configuration));
 });
 
 //builder.RegisterLogger()

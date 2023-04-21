@@ -1,6 +1,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutofacSerilogIntegration;
+using Morphware.Telepath.DataAccess;
 using Morphware.Telepath.Web;
 using Serilog;
 
@@ -20,7 +21,8 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
     builder.RegisterLogger();
-    builder.RegisterModule(new WebContainerModule(configuration));
+    builder.RegisterModule(new WebContainerModule());
+    builder.RegisterModule(new DataAccessContainerModule(configuration));
 });
 
 builder.Services.AddControllersWithViews();
