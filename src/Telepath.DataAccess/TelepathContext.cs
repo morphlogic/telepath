@@ -33,11 +33,29 @@ public partial class TelepathContext : DbContext
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer(_connectionString);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        //modelBuilder.Entity<GroupMember>()
+        //    .HasKey(c => new { c.ThinkMemberId, c.ThinkGroupId });
+
+        //modelBuilder.Entity<GroupMember>()
+        //    .HasOne(gm => gm.ThinkGroup)
+        //    .WithMany(g => g.GroupMembers)
+        //    .HasForeignKey(g => g.ThinkGroupId);
+
+        //modelBuilder.Entity<GroupMember>()
+        //    .HasOne(gm => gm.ThinkMember)
+        //    .WithMany(m => m.GroupMembers)
+        //    .HasForeignKey(m => m.ThinkMemberId);
+
+        //modelBuilder.Entity<ThinkGroup>()
+        //    .HasMany(c => c.GroupMembers);            
+
+        //modelBuilder.Entity<ThinkMember>()
+        //    .HasMany(c => c.GroupMembers);            
+
         OnModelCreatingPartial(modelBuilder);
     }
 

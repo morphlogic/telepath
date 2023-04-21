@@ -4,6 +4,7 @@ using AutofacSerilogIntegration;
 using Morphware.Telepath.Api;
 using Morphware.Telepath.DataAccess;
 using Serilog;
+using System.Text.Json.Serialization;
 
 var configurationBuilder = new ConfigurationBuilder();
 configurationBuilder.AddJsonFile("appsettings.json");
@@ -25,9 +26,9 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
     builder.RegisterModule(new DataAccessContainerModule(configuration));
 });
 
-//builder.RegisterLogger()
+builder.Services.AddControllers()
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

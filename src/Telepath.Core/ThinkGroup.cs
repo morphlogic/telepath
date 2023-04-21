@@ -14,6 +14,6 @@ namespace Morphware.Telepath.Core
 
         public string Description { get; set; }
 
-        public virtual ICollection<GroupMember> GroupMembers { get; set; }
+        public virtual ICollection<ThinkMember> ThinkMembers { get; set; }
     }
 }
