@@ -2,12 +2,13 @@
 using System.Diagnostics;
 using Morphware.Telepath.Web.Models;
 using ILogger = Serilog.ILogger;
+using Morphware.Telepath.DataAccess;
 
 namespace Morphware.Telepath.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger _logger;
+        private readonly ILogger _logger;        
 
         public HomeController(ILogger logger)
         {
@@ -15,7 +16,7 @@ namespace Morphware.Telepath.Web.Controllers
         }
 
         public IActionResult Index()
-        {
+        {            
             return View();
         }
 

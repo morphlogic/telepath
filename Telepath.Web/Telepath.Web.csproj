@@ -20,4 +20,9 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Telepath.Core\Telepath.Core.csproj" />
+    <ProjectReference Include="..\Telepath.DataAccess\Telepath.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

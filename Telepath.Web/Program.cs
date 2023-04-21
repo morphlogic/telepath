@@ -4,6 +4,11 @@ using AutofacSerilogIntegration;
 using Morphware.Telepath.Web;
 using Serilog;
 
+var configurationBuilder = new ConfigurationBuilder();
+configurationBuilder.AddJsonFile("appsettings.json");
+
+var configuration = configurationBuilder.Build();
+
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateLogger();
@@ -15,7 +20,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
     builder.RegisterLogger();
-    builder.RegisterModule(new WebContainerModule());
+    builder.RegisterModule(new WebContainerModule(configuration));
 });
 
 builder.Services.AddControllersWithViews();
