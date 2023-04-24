@@ -19,11 +19,11 @@ namespace Morphware.Telepath.DataAccess
 
         protected override void Load(ContainerBuilder builder)
         {
-            var connectionString = _configuration.GetConnectionString("TelepathConnection");
+            var connectionString = _configuration.GetConnectionString("Telepath");
 
             if (string.IsNullOrEmpty(connectionString))
             {
-                throw new ApplicationException("ConnectionString.TelepathConnection missing from configuration");
+                throw new ApplicationException("ConnectionStrings.Telepath missing from configuration");
             }
 
             builder.RegisterType<TelepathContext>()
