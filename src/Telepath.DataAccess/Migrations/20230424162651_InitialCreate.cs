@@ -12,6 +12,21 @@ namespace Morphware.Telepath.DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Members",
+                columns: table => new
+                {
+                    MemberId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Members", x => x.MemberId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reports",
                 columns: table => new
                 {
@@ -43,21 +58,6 @@ namespace Morphware.Telepath.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ThinkMembers",
-                columns: table => new
-                {
-                    ThinkMemberId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ThinkMembers", x => x.ThinkMemberId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Topics",
                 columns: table => new
                 {
@@ -72,26 +72,26 @@ namespace Morphware.Telepath.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ThinkGroupThinkMember",
+                name: "MemberThinkGroup",
                 columns: table => new
                 {
-                    ThinkGroupsThinkGroupId = table.Column<int>(type: "int", nullable: false),
-                    ThinkMembersThinkMemberId = table.Column<int>(type: "int", nullable: false)
+                    MembersMemberId = table.Column<int>(type: "int", nullable: false),
+                    ThinkGroupsThinkGroupId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ThinkGroupThinkMember", x => new { x.ThinkGroupsThinkGroupId, x.ThinkMembersThinkMemberId });
+                    table.PrimaryKey("PK_MemberThinkGroup", x => new { x.MembersMemberId, x.ThinkGroupsThinkGroupId });
                     table.ForeignKey(
-                        name: "FK_ThinkGroupThinkMember_ThinkGroups_ThinkGroupsThinkGroupId",
+                        name: "FK_MemberThinkGroup_Members_MembersMemberId",
+                        column: x => x.MembersMemberId,
+                        principalTable: "Members",
+                        principalColumn: "MemberId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MemberThinkGroup_ThinkGroups_ThinkGroupsThinkGroupId",
                         column: x => x.ThinkGroupsThinkGroupId,
                         principalTable: "ThinkGroups",
                         principalColumn: "ThinkGroupId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ThinkGroupThinkMember_ThinkMembers_ThinkMembersThinkMemberId",
-                        column: x => x.ThinkMembersThinkMemberId,
-                        principalTable: "ThinkMembers",
-                        principalColumn: "ThinkMemberId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -102,13 +102,25 @@ namespace Morphware.Telepath.DataAccess.Migrations
                     ThoughtId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ThinkGroupId = table.Column<int>(type: "int", nullable: false),
-                    ThinkMemberId = table.Column<int>(type: "int", nullable: false),
+                    MemberId = table.Column<int>(type: "int", nullable: false),
                     TopicId = table.Column<int>(type: "int", nullable: false),
                     Occurred = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Thoughts", x => x.ThoughtId);
+                    table.ForeignKey(
+                        name: "FK_Thoughts_Members_MemberId",
+                        column: x => x.MemberId,
+                        principalTable: "Members",
+                        principalColumn: "MemberId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Thoughts_ThinkGroups_ThinkGroupId",
+                        column: x => x.ThinkGroupId,
+                        principalTable: "ThinkGroups",
+                        principalColumn: "ThinkGroupId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Thoughts_Topics_TopicId",
                         column: x => x.TopicId,
@@ -142,14 +154,24 @@ namespace Morphware.Telepath.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_MemberThinkGroup_ThinkGroupsThinkGroupId",
+                table: "MemberThinkGroup",
+                column: "ThinkGroupsThinkGroupId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ReportThought_ThoughtsThoughtId",
                 table: "ReportThought",
                 column: "ThoughtsThoughtId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ThinkGroupThinkMember_ThinkMembersThinkMemberId",
-                table: "ThinkGroupThinkMember",
-                column: "ThinkMembersThinkMemberId");
+                name: "IX_Thoughts_MemberId",
+                table: "Thoughts",
+                column: "MemberId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Thoughts_ThinkGroupId",
+                table: "Thoughts",
+                column: "ThinkGroupId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Thoughts_TopicId",
@@ -161,10 +183,10 @@ namespace Morphware.Telepath.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ReportThought");
+                name: "MemberThinkGroup");
 
             migrationBuilder.DropTable(
-                name: "ThinkGroupThinkMember");
+                name: "ReportThought");
 
             migrationBuilder.DropTable(
                 name: "Reports");
@@ -173,10 +195,10 @@ namespace Morphware.Telepath.DataAccess.Migrations
                 name: "Thoughts");
 
             migrationBuilder.DropTable(
-                name: "ThinkGroups");
+                name: "Members");
 
             migrationBuilder.DropTable(
-                name: "ThinkMembers");
+                name: "ThinkGroups");
 
             migrationBuilder.DropTable(
                 name: "Topics");

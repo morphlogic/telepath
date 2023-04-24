@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Morphware.Telepath.Core
 {
-    public class ThinkMember
+    public class Member
     {
-        public int ThinkMemberId { get; set; }
+        public int MemberId { get; set; }
 
         public string Username { get; set; }
 
@@ -17,5 +17,7 @@ namespace Morphware.Telepath.Core
         public string Email { get; set; }
 
         public virtual ICollection<ThinkGroup> ThinkGroups { get; set; }
+
+        public virtual ICollection<Thought> Thoughts { get; set; }
     }
 }

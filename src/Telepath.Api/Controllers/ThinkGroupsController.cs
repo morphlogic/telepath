@@ -30,9 +30,9 @@ namespace Morphware.Telepath.Api.Controllers
               return NotFound();
           }
 
-            var blah = _context.ThinkGroups.Include(g => g.ThinkMembers).ToList();
+            var blah = _context.ThinkGroups.Include(g => g.Members).ToList();
 
-            return await _context.ThinkGroups.Include(g => g.ThinkMembers).ToListAsync();
+            return await _context.ThinkGroups.Include(g => g.Members).ToListAsync();
         }
 
         // GET: api/ThinkGroups/5

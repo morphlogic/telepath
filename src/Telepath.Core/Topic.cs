@@ -13,5 +13,7 @@ namespace Morphware.Telepath.Core
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        public virtual ICollection<Thought> Thoughts { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Morphware.Telepath.Core
 
         public int ThinkGroupId { get; set; }
 
-        public int ThinkMemberId { get; set; }
+        public int MemberId { get; set; }
 
         public int TopicId { get; set; }
 
