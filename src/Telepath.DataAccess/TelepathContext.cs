@@ -8,11 +8,9 @@ namespace Morphware.Telepath.DataAccess;
 public partial class TelepathContext : DbContext
 {
     public DbSet<ThinkGroup> ThinkGroups { get; set; }
-    public DbSet<ThinkMember> ThinkMembers { get; set; }
-    public DbSet<GroupMember> GroupMembers { get; set; }
+    public DbSet<ThinkMember> ThinkMembers { get; set; }    
     public DbSet<Thought> Thoughts { get; set; }
-    public DbSet<Report> Reports { get; set; }
-    public DbSet<ReportThought> ReportThoughts { get; set; }
+    public DbSet<Report> Reports { get; set; }    
     public DbSet<Topic> Topics { get; set; }
 
     private string _connectionString;

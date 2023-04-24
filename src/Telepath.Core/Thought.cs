@@ -16,10 +16,10 @@ namespace Morphware.Telepath.Core
 
         public int TopicId { get; set; }
 
-        public virtual ICollection<ReportThought> ReportThoughts { get; set; }
-
         public Topic Topic { get; set; }
 
         public DateTime Occurred { get; set; }
+
+        public virtual ICollection<Report> Reports { get; set; }
     }
 }

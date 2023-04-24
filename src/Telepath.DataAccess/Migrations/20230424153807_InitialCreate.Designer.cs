@@ -12,8 +12,8 @@ using Morphware.Telepath.DataAccess;
 namespace Morphware.Telepath.DataAccess.Migrations
 {
     [DbContext(typeof(TelepathContext))]
-    [Migration("20230421201801_AddedThinkGroupThinkMember")]
-    partial class AddedThinkGroupThinkMember
+    [Migration("20230424153807_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,23 +24,6 @@ namespace Morphware.Telepath.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Morphware.Telepath.Core.GroupMember", b =>
-                {
-                    b.Property<int>("ThinkMemberId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("ThinkGroupId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
-
-                    b.HasKey("ThinkMemberId", "ThinkGroupId");
-
-                    b.HasIndex("ThinkGroupId");
-
-                    b.ToTable("GroupMembers");
-                });
 
             modelBuilder.Entity("Morphware.Telepath.Core.Report", b =>
                 {
@@ -68,23 +51,6 @@ namespace Morphware.Telepath.DataAccess.Migrations
                     b.HasKey("ReportId");
 
                     b.ToTable("Reports");
-                });
-
-            modelBuilder.Entity("Morphware.Telepath.Core.ReportThought", b =>
-                {
-                    b.Property<int>("ReportId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("ThoughtId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
-
-                    b.HasKey("ReportId", "ThoughtId");
-
-                    b.HasIndex("ThoughtId");
-
-                    b.ToTable("ReportThoughts");
                 });
 
             modelBuilder.Entity("Morphware.Telepath.Core.ThinkGroup", b =>
@@ -181,6 +147,21 @@ namespace Morphware.Telepath.DataAccess.Migrations
                     b.ToTable("Topics");
                 });
 
+            modelBuilder.Entity("ReportThought", b =>
+                {
+                    b.Property<int>("ReportsReportId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ThoughtsThoughtId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ReportsReportId", "ThoughtsThoughtId");
+
+                    b.HasIndex("ThoughtsThoughtId");
+
+                    b.ToTable("ReportThought");
+                });
+
             modelBuilder.Entity("ThinkGroupThinkMember", b =>
                 {
                     b.Property<int>("ThinkGroupsThinkGroupId")
@@ -196,44 +177,6 @@ namespace Morphware.Telepath.DataAccess.Migrations
                     b.ToTable("ThinkGroupThinkMember");
                 });
 
-            modelBuilder.Entity("Morphware.Telepath.Core.GroupMember", b =>
-                {
-                    b.HasOne("Morphware.Telepath.Core.ThinkGroup", "ThinkGroup")
-                        .WithMany()
-                        .HasForeignKey("ThinkGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Morphware.Telepath.Core.ThinkMember", "ThinkMember")
-                        .WithMany()
-                        .HasForeignKey("ThinkMemberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ThinkGroup");
-
-                    b.Navigation("ThinkMember");
-                });
-
-            modelBuilder.Entity("Morphware.Telepath.Core.ReportThought", b =>
-                {
-                    b.HasOne("Morphware.Telepath.Core.Report", "Report")
-                        .WithMany("ReportThoughts")
-                        .HasForeignKey("ReportId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Morphware.Telepath.Core.Thought", "Thought")
-                        .WithMany("ReportThoughts")
-                        .HasForeignKey("ThoughtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Report");
-
-                    b.Navigation("Thought");
-                });
-
             modelBuilder.Entity("Morphware.Telepath.Core.Thought", b =>
                 {
                     b.HasOne("Morphware.Telepath.Core.Topic", "Topic")
@@ -243,6 +186,21 @@ namespace Morphware.Telepath.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Topic");
+                });
+
+            modelBuilder.Entity("ReportThought", b =>
+                {
+                    b.HasOne("Morphware.Telepath.Core.Report", null)
+                        .WithMany()
+                        .HasForeignKey("ReportsReportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Morphware.Telepath.Core.Thought", null)
+                        .WithMany()
+                        .HasForeignKey("ThoughtsThoughtId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ThinkGroupThinkMember", b =>
@@ -258,16 +216,6 @@ namespace Morphware.Telepath.DataAccess.Migrations
                         .HasForeignKey("ThinkMembersThinkMemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Morphware.Telepath.Core.Report", b =>
-                {
-                    b.Navigation("ReportThoughts");
-                });
-
-            modelBuilder.Entity("Morphware.Telepath.Core.Thought", b =>
-                {
-                    b.Navigation("ReportThoughts");
                 });
 #pragma warning restore 612, 618
         }

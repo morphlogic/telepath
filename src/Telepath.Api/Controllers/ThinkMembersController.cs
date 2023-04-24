@@ -29,7 +29,7 @@ namespace Morphware.Telepath.Api.Controllers
           {
               return NotFound();
           }
-            return await _context.ThinkMembers.ToListAsync();
+            return await _context.ThinkMembers.Include(m => m.ThinkGroups).ToListAsync();
         }
 
         // GET: api/ThinkMembers/5
