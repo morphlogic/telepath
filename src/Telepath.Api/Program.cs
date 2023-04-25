@@ -1,8 +1,10 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutofacSerilogIntegration;
+using MassTransit;
 using Morphware.Telepath.Api;
 using Morphware.Telepath.DataAccess;
+using Morphware.Telepath.Messaging;
 using Serilog;
 using System.Text.Json.Serialization;
 
@@ -11,6 +13,7 @@ configurationBuilder.AddJsonFile("appsettings.json");
 
 var configuration = configurationBuilder.Build();
 
+//  TODO:   set up Serilog with proper Sinks
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateLogger();
@@ -22,8 +25,16 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {   
     builder.RegisterLogger();
+
+    builder.RegisterModule(new DataAccessContainerModule(Log.Logger, configuration));
+    builder.RegisterModule(new MessagingContainerModule(Log.Logger, configuration));
+
     builder.RegisterModule(new ApiContainerModule());
-    builder.RegisterModule(new DataAccessContainerModule(configuration));
+});
+
+builder.Services.AddMassTransit(x =>
+{
+    x.ConfigureMassTransit(configuration);
 });
 
 builder.Services.AddControllers()

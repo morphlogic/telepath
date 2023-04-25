@@ -30,3 +30,24 @@ Web is a user-friendly interface that allows human interaction with Telepath. As
 ### Telepath.Tests
 
 Tests project contains automated unit, integration, and system tests designed to ensure maximal congruence between Telepath's requirements and operation.
+
+## Components
+
+Logger:  Serilog
+IoC container:  Autofac
+Database:  Microsoft SQL Server
+Object-relational mapper:  Entity Framework
+Message broker:  RabbitMQ
+Service bus:  MassTransit
+API scaffolding:  Swagger
+Automated tests:  MSTest
+
+## Configuration
+
+Set ConnectionStrings.Telepath to a valid MSSQL connection string in Api, Web, and Worker projects.
+
+## License
+
+Telepath is provided free of charge under MIT license terms. Do with it what you will without expectation of warranty or liability from the author (me).
+
+If you find Telepath or any part of it useful, please let me know! I'd love to hear your thoughts on it.
