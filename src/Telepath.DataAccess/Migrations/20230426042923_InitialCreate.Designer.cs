@@ -12,7 +12,7 @@ using Morphware.Telepath.DataAccess;
 namespace Morphware.Telepath.DataAccess.Migrations
 {
     [DbContext(typeof(TelepathContext))]
-    [Migration("20230424162651_InitialCreate")]
+    [Migration("20230426042923_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -81,6 +81,9 @@ namespace Morphware.Telepath.DataAccess.Migrations
 
                     b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<int>("ThinkGroupId")
                         .HasColumnType("int");

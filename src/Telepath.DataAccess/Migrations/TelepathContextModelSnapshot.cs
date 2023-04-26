@@ -79,6 +79,9 @@ namespace Morphware.Telepath.DataAccess.Migrations
                     b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<int>("ThinkGroupId")
                         .HasColumnType("int");
 

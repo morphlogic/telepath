@@ -34,6 +34,7 @@ namespace Morphware.Telepath.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ThinkGroupId = table.Column<int>(type: "int", nullable: false),
                     TopicId = table.Column<int>(type: "int", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Start = table.Column<DateTime>(type: "datetime2", nullable: false),
                     End = table.Column<DateTime>(type: "datetime2", nullable: false)

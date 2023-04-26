@@ -14,6 +14,8 @@ namespace Morphware.Telepath.Core
 
         public int? TopicId { get; set; }
 
+        public ReportStatus Status { get; set; }
+
         public DateTime Created { get; set; }
 
         public DateTime Start { get; set; }
