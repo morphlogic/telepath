@@ -20,7 +20,7 @@ namespace Morphware.Telepath.Core
 
         public DateTime Start { get; set; }
 
-        public DateTime End { get; set; }
+        public DateTime? End { get; set; }
 
         public virtual ICollection<Thought> Thoughts { get; set; }
     }

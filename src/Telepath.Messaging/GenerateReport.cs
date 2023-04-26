@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Morphware.Telepath.Messaging
 {
-    internal class Producer
+    public record GenerateReport
     {
+        public int ReportId { get; init; }
+
+        public GenerateReport(int reportId)
+        {
+            ReportId = reportId;
+        }
     }
 }
