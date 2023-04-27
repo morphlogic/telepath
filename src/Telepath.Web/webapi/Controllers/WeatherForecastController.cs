@@ -31,7 +31,7 @@ public class WeatherForecastController : ControllerBase
 
         //await client.PostAsJsonAsync("api/ThinkGroups", new ThinkGroup("Group" + DateTime.Now.Ticks.ToString(), "Another group"));
 
-        var viewModel = await GetViewModel();
+        //var viewModel = await GetViewModel();
 
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
@@ -42,6 +42,7 @@ public class WeatherForecastController : ControllerBase
         .ToArray();        
     }
 
+    //[HttpGet(Name = "GetViewModel")]
     public async Task<DashboardViewModel> GetViewModel()
     {
         var client = new HttpClient
