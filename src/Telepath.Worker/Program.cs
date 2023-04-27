@@ -5,6 +5,7 @@ using MassTransit;
 using Morphware.Telepath.DataAccess;
 using Morphware.Telepath.Messaging;
 using Morphware.Telepath.Worker;
+using Morphware.Telepath.Worker.Consumers;
 using Serilog;
 
 var configurationBuilder = new ConfigurationBuilder();
@@ -36,6 +37,8 @@ IHost host = builder
     {
         services.AddMassTransit(x =>
         {
+            x.AddConsumer<GenerateReportConsumer>();
+
             x.ConfigureMassTransit(configuration);
         });
 

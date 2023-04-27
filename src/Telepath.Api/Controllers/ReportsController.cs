@@ -17,12 +17,12 @@ namespace Morphware.Telepath.Api.Controllers
     public class ReportsController : ControllerBase
     {
         private readonly TelepathContext _context;
-        private readonly ISendEndpointProvider _sendEndpointProvider;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public ReportsController(TelepathContext context, ISendEndpointProvider sendEndpointProvider)
+        public ReportsController(TelepathContext context, IPublishEndpoint publishEndpoint)
         {
             _context = context;
-            _sendEndpointProvider = sendEndpointProvider;
+            _publishEndpoint = publishEndpoint;
         }
 
         // GET: api/Reports
@@ -109,13 +109,18 @@ namespace Morphware.Telepath.Api.Controllers
 
             report.ReportId = 0;
             report.Status = ReportStatus.New;
-            report.Created = DateTime.UtcNow;            
+            report.Created = DateTime.UtcNow;
+
+            if(report.End == null)
+            {
+                report.End = DateTime.UtcNow;
+            }
 
             _context.Reports.Add(report);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();            
 
-            await _sendEndpointProvider.Send(new GenerateReport(report.ReportId));
-
+            await _publishEndpoint.Publish(new GenerateReport(report.ReportId));
+           
             return CreatedAtAction("GetReport", new { id = report.ReportId }, report);
         }
 

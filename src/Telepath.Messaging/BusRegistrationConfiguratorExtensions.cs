@@ -19,6 +19,8 @@ namespace Morphware.Telepath.Messaging
                 registrationConfigurator.UsingInMemory((context, factoryConfigurator) =>
                 {
                     //  TODO:   configure in-memory queue
+
+                    factoryConfigurator.ConfigureEndpoints(context);
                 });
             }
             else if(messagingConfiguration.Type == MessagingType.RabbitMQ)
