@@ -17,13 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telepath.Api", "Telepath.Ap
 		{E6FB58EE-6D47-4236-9AF9-B73454E64050} = {E6FB58EE-6D47-4236-9AF9-B73454E64050}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telepath.Web", "Telepath.Web\Telepath.Web.csproj", "{D3D7359E-00D6-40B2-BA31-C754410ADEBD}"
-	ProjectSection(ProjectDependencies) = postProject
-		{04A167C6-3FE0-4E0E-B358-4B4C5D0DF39F} = {04A167C6-3FE0-4E0E-B358-4B4C5D0DF39F}
-		{5C1FBAD6-14B7-43FD-A150-42C6331E39B6} = {5C1FBAD6-14B7-43FD-A150-42C6331E39B6}
-		{E6FB58EE-6D47-4236-9AF9-B73454E64050} = {E6FB58EE-6D47-4236-9AF9-B73454E64050}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telepath.Worker", "Telepath.Worker\Telepath.Worker.csproj", "{F1F988E5-D219-4A8B-A651-D55F9803D257}"
 	ProjectSection(ProjectDependencies) = postProject
 		{04A167C6-3FE0-4E0E-B358-4B4C5D0DF39F} = {04A167C6-3FE0-4E0E-B358-4B4C5D0DF39F}
@@ -37,10 +30,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telepath.Tests", "Telepath.
 		{E6FB58EE-6D47-4236-9AF9-B73454E64050} = {E6FB58EE-6D47-4236-9AF9-B73454E64050}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telepath.Messaging", "Telepath.Messaging\Telepath.Messaging.csproj", "{5C1FBAD6-14B7-43FD-A150-42C6331E39B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telepath.Messaging", "Telepath.Messaging\Telepath.Messaging.csproj", "{5C1FBAD6-14B7-43FD-A150-42C6331E39B6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E6FB58EE-6D47-4236-9AF9-B73454E64050} = {E6FB58EE-6D47-4236-9AF9-B73454E64050}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Telepath.Web", "Telepath.Web", "{5CA4D1EE-5CFB-4798-8464-0BA1ADEB2397}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webapi", "Telepath.Web\webapi\webapi.csproj", "{0530422F-D7DA-446D-84E3-A6339A279576}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "reactapp", "Telepath.Web\reactapp\reactapp.esproj", "{E5AE3FBF-B66C-45B6-956C-D1FB30C4A46B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,10 +59,6 @@ Global
 		{018EEA6A-CEA3-489D-BE12-66482D82287D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{018EEA6A-CEA3-489D-BE12-66482D82287D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{018EEA6A-CEA3-489D-BE12-66482D82287D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D3D7359E-00D6-40B2-BA31-C754410ADEBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D3D7359E-00D6-40B2-BA31-C754410ADEBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D3D7359E-00D6-40B2-BA31-C754410ADEBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D3D7359E-00D6-40B2-BA31-C754410ADEBD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F1F988E5-D219-4A8B-A651-D55F9803D257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F1F988E5-D219-4A8B-A651-D55F9803D257}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1F988E5-D219-4A8B-A651-D55F9803D257}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -76,9 +71,23 @@ Global
 		{5C1FBAD6-14B7-43FD-A150-42C6331E39B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C1FBAD6-14B7-43FD-A150-42C6331E39B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C1FBAD6-14B7-43FD-A150-42C6331E39B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0530422F-D7DA-446D-84E3-A6339A279576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0530422F-D7DA-446D-84E3-A6339A279576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0530422F-D7DA-446D-84E3-A6339A279576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0530422F-D7DA-446D-84E3-A6339A279576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5AE3FBF-B66C-45B6-956C-D1FB30C4A46B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5AE3FBF-B66C-45B6-956C-D1FB30C4A46B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5AE3FBF-B66C-45B6-956C-D1FB30C4A46B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E5AE3FBF-B66C-45B6-956C-D1FB30C4A46B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5AE3FBF-B66C-45B6-956C-D1FB30C4A46B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5AE3FBF-B66C-45B6-956C-D1FB30C4A46B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0530422F-D7DA-446D-84E3-A6339A279576} = {5CA4D1EE-5CFB-4798-8464-0BA1ADEB2397}
+		{E5AE3FBF-B66C-45B6-956C-D1FB30C4A46B} = {5CA4D1EE-5CFB-4798-8464-0BA1ADEB2397}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7FB6F6CA-DBEA-45CD-A397-26422C2E2AE1}
