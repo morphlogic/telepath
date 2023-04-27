@@ -25,10 +25,10 @@ namespace Morphware.Telepath.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ThinkGroup>>> GetThinkGroups()
         {
-          if (_context.ThinkGroups == null)
-          {
-              return NotFound();
-          }
+            if (_context.ThinkGroups == null)
+            {
+                return NotFound();
+            }
 
             var blah = _context.ThinkGroups.Include(g => g.Members).ToList();
 
@@ -39,10 +39,10 @@ namespace Morphware.Telepath.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ThinkGroup>> GetThinkGroup(int id)
         {
-          if (_context.ThinkGroups == null)
-          {
-              return NotFound();
-          }
+            if (_context.ThinkGroups == null)
+            {
+                return NotFound();
+            }
             var thinkGroup = await _context.ThinkGroups.FindAsync(id);
 
             if (thinkGroup == null)
@@ -89,10 +89,26 @@ namespace Morphware.Telepath.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<ThinkGroup>> PostThinkGroup(ThinkGroup thinkGroup)
         {
-          if (_context.ThinkGroups == null)
-          {
-              return Problem("Entity set 'TelepathContext.ThinkGroups'  is null.");
-          }
+            if (string.IsNullOrEmpty(thinkGroup.Name))
+            {
+                return BadRequest("ThinkGroup.Name must not be null or empty");
+            }
+
+            if (string.IsNullOrEmpty(thinkGroup.Description))
+            {
+                return BadRequest("ThinkGroup.Description must not be null or empty");
+            }
+            
+            if(_context.ThinkGroups.Any(g => g.Name == thinkGroup.Name))
+            {
+                return Conflict("A ThinkGroup already exists with name:  " + thinkGroup.Name);
+            }
+
+            if (_context.ThinkGroups == null)
+            {
+                return Problem("Entity set 'TelepathContext.ThinkGroups'  is null.");
+            }
+
             _context.ThinkGroups.Add(thinkGroup);
             await _context.SaveChangesAsync();
 

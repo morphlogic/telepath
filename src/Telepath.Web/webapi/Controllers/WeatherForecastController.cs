@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Morphware.Telepath.Core;
 using Morphware.Telepath.Web;
+using Morphware.Telepath.Web.Models;
 
 namespace Morphware.Telepath.Web.Controllers;
 
@@ -20,14 +22,38 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    public async Task<IEnumerable<WeatherForecast>> Get()
     {
+        //var client = new HttpClient
+        //{
+        //    BaseAddress=new Uri("https://localhost:7296")
+        //};
+
+        //await client.PostAsJsonAsync("api/ThinkGroups", new ThinkGroup("Group" + DateTime.Now.Ticks.ToString(), "Another group"));
+
+        var viewModel = await GetViewModel();
+
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
             TemperatureC = Random.Shared.Next(-20, 55),
             Summary = Summaries[Random.Shared.Next(Summaries.Length)]
         })
-        .ToArray();
+        .ToArray();        
+    }
+
+    public async Task<DashboardViewModel> GetViewModel()
+    {
+        var client = new HttpClient
+        {
+            BaseAddress = new Uri("https://localhost:7296")
+        };
+
+        var thinkGroups = await client.GetFromJsonAsync<ICollection<ThinkGroup>>("api/ThinkGroups");
+
+        return new DashboardViewModel
+        {
+            ThinkGroups = thinkGroups,
+        };
     }
 }
