@@ -25,7 +25,13 @@ The Worker processes events and commands from the bus, directly manipulating the
 
 ### Telepath.Web
 
-Web is a user-friendly interface that allows human interaction with Telepath. As such, it depends weakly on the Api service. Web should not directly read or write to the database. Web, along with the Tests project, are on the outermost periphery of the solution.
+Web contains two projects that compose the UI that allows human interaction with Telepath:
+
+The reactapp project serves as the most peripheral interface, hosted in React, that presents content to the user and accepts input to the rest of the app.
+
+The webapi project brokers communication between the reactapp interface and other components within the Telepath solution. As such, it depends weakly on the Api service. Web should not directly read or write to the database.
+
+Web, along with the Tests project, are on the outermost periphery of the solution.
 
 ### Telepath.Tests
 
