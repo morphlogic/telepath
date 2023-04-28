@@ -40,21 +40,5 @@ public class WeatherForecastController : ControllerBase
             Summary = Summaries[Random.Shared.Next(Summaries.Length)]
         })
         .ToArray();        
-    }
-
-    //[HttpGet(Name = "GetViewModel")]
-    public async Task<DashboardViewModel> GetViewModel()
-    {
-        var client = new HttpClient
-        {
-            BaseAddress = new Uri("https://localhost:7296")
-        };
-
-        var thinkGroups = await client.GetFromJsonAsync<ICollection<ThinkGroup>>("api/ThinkGroups");
-
-        return new DashboardViewModel
-        {
-            ThinkGroups = thinkGroups,
-        };
-    }
+    }        
 }
