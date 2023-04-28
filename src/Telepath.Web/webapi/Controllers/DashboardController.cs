@@ -18,9 +18,15 @@ namespace Morphware.Telepath.Web.Controllers
 
             var thinkGroups = await client.GetFromJsonAsync<ICollection<ThinkGroup>>("api/ThinkGroups");
 
+            var members = await client.GetFromJsonAsync<ICollection<Member>>("api/Members");
+
+            var topics = await client.GetFromJsonAsync<ICollection<Topic>>("api/Topics");
+
             return new DashboardViewModel
             {
                 ThinkGroups = thinkGroups,
+                Members = members,
+                Topics = topics
             };
         }
     }
