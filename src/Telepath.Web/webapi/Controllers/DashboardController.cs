@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Morphware.Telepath.Core;
 using Morphware.Telepath.Web.Models;
+using System.Diagnostics;
 
 namespace Morphware.Telepath.Web.Controllers
 {
@@ -16,17 +17,23 @@ namespace Morphware.Telepath.Web.Controllers
                 BaseAddress = new Uri("https://localhost:7296")
             };
 
-            var thinkGroups = await client.GetFromJsonAsync<ICollection<ThinkGroup>>("api/ThinkGroups");
+            var thinkGroupsTask = client.GetFromJsonAsync<ICollection<ThinkGroup>>("api/ThinkGroups");
 
-            var members = await client.GetFromJsonAsync<ICollection<Member>>("api/Members");
+            var membersTask = client.GetFromJsonAsync<ICollection<Member>>("api/Members");
 
-            var topics = await client.GetFromJsonAsync<ICollection<Topic>>("api/Topics");
+            var topicsTask = client.GetFromJsonAsync<ICollection<Topic>>("api/Topics");
+
+            Task.WaitAll(thinkGroupsTask, membersTask, topicsTask);
+
+            Debug.Assert(thinkGroupsTask.Result != null);
+            Debug.Assert(membersTask.Result != null);
+            Debug.Assert(topicsTask.Result != null);
 
             return new DashboardViewModel
             {
-                ThinkGroups = thinkGroups,
-                Members = members,
-                Topics = topics
+                ThinkGroups = thinkGroupsTask.Result,
+                Members = membersTask.Result,
+                Topics = topicsTask.Result
             };
         }
     }
