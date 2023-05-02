@@ -17,9 +17,10 @@ export default class App extends Component {
         function handleClick() {
             alert('hi');
 
-            fetch('https://localhost:3000/weatherforecast/getviewmodel')
-                .then(response => response.json())
-                .then(json => console.log(json));
+            fetch('dashboard')
+                .then(response => console.log(response.text()));
+                //.then(response => response.json())
+                //.then(json => console.log(json));
 
             //const response = await fetch('viewmodel');
             //const data = await response.json();

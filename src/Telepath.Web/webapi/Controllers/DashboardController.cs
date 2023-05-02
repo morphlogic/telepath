@@ -8,8 +8,8 @@ namespace Morphware.Telepath.Web.Controllers
     [Route("[controller]")]
     public class DashboardController : ControllerBase
     {
-        [HttpGet(Name ="GetViewModel")]
-        public async Task<DashboardViewModel> GetViewModel()
+        [HttpGet(Name ="GetDashboard")]
+        public async Task<DashboardViewModel> Get()
         {
             var client = new HttpClient
             {
