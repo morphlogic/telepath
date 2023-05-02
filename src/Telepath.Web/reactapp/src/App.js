@@ -18,7 +18,12 @@ export default class App extends Component {
             alert('hi');
 
             fetch('dashboard')
-                .then(response => console.log(response.text()));
+                .then(function (response) {
+                    var blah = response.json();
+                    return blah;
+                }).then(function (data) {
+                    console.log(data);
+                });
                 //.then(response => response.json())
                 //.then(json => console.log(json));
 
@@ -51,16 +56,33 @@ export default class App extends Component {
         );
     }
 
+    static renderDashboard(dashboard) {
+
+        console.log(dashboard);
+
+        return (
+            <ul>
+                {dashboard.thinkGroups.map(item =>
+                    <li>{item.name}</li>
+                )}
+            </ul>
+        );
+    }
+
     render() {
         let contents = this.state.loading
             ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
             : App.renderForecastsTable(this.state.forecasts);
+        let dashboardView = this.state.loading
+            ? <p><em>Loading dashboard...</em></p>
+            : App.renderDashboard(this.state.dashboard);
 
         return (
             <div>
                 <h1 id="tabelLabel" >Weather forecast</h1>
                 <p>This component demonstrates fetching data from the server.</p>
                 {contents}
+                {dashboardView}
             </div>
         );
     }
@@ -68,6 +90,11 @@ export default class App extends Component {
     async populateWeatherData() {
         const response = await fetch('weatherforecast');
         const data = await response.json();
-        this.setState({ forecasts: data, loading: false });
+        const dashResponse = await fetch('dashboard');
+        const dashData = await dashResponse.json();            
+
+        console.log(dashData);
+
+        this.setState({ forecasts: data, dashboard: dashData, loading: false });
     }
 }
