@@ -7,6 +7,8 @@ Members belong to one or more ThinkGroups and submit Thoughts each pertaining to
 
 Telepath follows a general onion architectural style. In the center is Core, upon which all other projects depend. One level up is DataAccess, which serves as an intermediary between the database and the distributed app. On the periphery are the Api, Web, Worker, and Tests projects, all of which depend upon Core and DataAccess.
 
+Telepath.Web and Telepath.Api are two independently deployable units to facilitate independent scaling based on traffic. If Telepath is used primarily by way of mobile app and other direct API calls, then Telepath.Api will likely scale more quickly than Telepath.Web to support traffic. If the web interface is the main source of demand, then Telepath.Web will likely scale commensurately with respect to Telepath.Api
+
 ### Telepath.Core
 
 Core contains the domain classes, that is to say the model of the domain, where the structure and business logic reside. All other projects depend on Core.

@@ -84,6 +84,30 @@ namespace Morphware.Telepath.Api.Controllers
             return NoContent();
         }
 
+        [HttpPut("{thinkGroupId}/Members/{memberId}")]
+        public async Task<IActionResult> AddMemberToThinkGroup(int thinkGroupId, int memberId)
+        {
+            var thinkGroup = _context.ThinkGroups.FirstOrDefault(g => g.ThinkGroupId == thinkGroupId);
+
+            if(thinkGroup == null)
+            {
+                return NotFound($"Could not find a ThinkGroup with ThinkGroupId {thinkGroupId}");
+            }
+
+            var member = _context.Members.FirstOrDefault(m => m.MemberId == memberId);
+
+            if(member == null)
+            {
+                return Conflict($"Could not find a Member with MemberId {memberId}");
+            }
+
+            thinkGroup.Members.Add(member);
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
         // POST: api/ThinkGroups
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
