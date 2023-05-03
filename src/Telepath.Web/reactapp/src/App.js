@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Autocomplete from 'react-autocomplete';
 
 export default class App extends Component {
     static displayName = App.name;
@@ -24,8 +25,8 @@ export default class App extends Component {
                 }).then(function (data) {
                     console.log(data);
                 });
-                //.then(response => response.json())
-                //.then(json => console.log(json));
+            //.then(response => response.json())
+            //.then(json => console.log(json));
 
             //const response = await fetch('viewmodel');
             //const data = await response.json();
@@ -61,13 +62,16 @@ export default class App extends Component {
         console.log(dashboard);
 
         return (
-            <ul>
-                {dashboard.thinkGroups.map(item =>
-                    <li>{item.name}</li>
-                )}
-            </ul>
+            <>
+                <select name="thinkGroup-to-add-to-member" id="thinkGroup-to-add-to-member">
+                    {dashboard.thinkGroups.map(item =>
+                        <option value={item.thinkGroupId}>{item.name}</option>
+                    )}
+                </select>                
+            </>
         );
     }
+    //<Autocomplete id="member-to-add-to-thinkGroup" options={dashboard.members} />
 
     render() {
         let contents = this.state.loading
@@ -91,7 +95,7 @@ export default class App extends Component {
         const response = await fetch('weatherforecast');
         const data = await response.json();
         const dashResponse = await fetch('dashboard');
-        const dashData = await dashResponse.json();            
+        const dashData = await dashResponse.json();
 
         console.log(dashData);
 
