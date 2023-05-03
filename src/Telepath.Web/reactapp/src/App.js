@@ -67,11 +67,26 @@ export default class App extends Component {
                     {dashboard.thinkGroups.map(item =>
                         <option value={item.thinkGroupId}>{item.name}</option>
                     )}
-                </select>                
+                </select>
+                <Autocomplete
+                    id="member-to-add-to-thinkGroup"
+                    value={dashboard.selectedMember}
+                    items={dashboard.members}
+                    getItemValue={item => item.name}
+                    renderMenu={item => (
+                        <div className="dropdown">
+                            {item}
+                        </div>
+                    )}
+                    renderItem={(item, isHighlighted) =>
+                        <div className={`item ${isHighlighted ? 'selected-item' : ''}`}>
+                            {item.title}
+                        </div>
+                    }
+                />
             </>
         );
     }
-    //<Autocomplete id="member-to-add-to-thinkGroup" options={dashboard.members} />
 
     render() {
         let contents = this.state.loading
