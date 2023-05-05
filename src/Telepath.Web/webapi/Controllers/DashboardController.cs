@@ -36,5 +36,16 @@ namespace Morphware.Telepath.Web.Controllers
                 Topics = topicsTask.Result
             };
         }
+        
+        [HttpPut]
+        public async Task AddMemberToGroup(int memberId, int thinkGroupId)
+        {
+            var client = new HttpClient
+            {
+                BaseAddress = new Uri("https://localhost:7296")
+            };
+
+            await client.PutAsync($"api/ThinkGroups/{thinkGroupId}/Members/{memberId}", null);
+        }
     }
 }

@@ -3,14 +3,14 @@ import Autocomplete from 'react-autocomplete';
 
 export default class App extends Component {
     state = {
-        selectedMemberId: '', dashboardData: {}, loading: true
+        selectedMemberId: '', selectedGroupId: '', dashboardData: {}, loading: true
     };
 
     componentDidMount() {
         fetch('dashboard')
             .then(r => r.json())
             .then(d => {
-                this.setState({ dashboardData: d, loading: false })                
+                this.setState({ dashboardData: d, loading: false })
             });
     }
 
@@ -28,7 +28,7 @@ export default class App extends Component {
                                     value={this.state.selectedMemberId}
                                     items={this.state.dashboardData.members}
                                     getItemValue={item => item.memberId.toString()}
-                                    getOptionSelected={item => item.fullName }
+                                    getOptionSelected={item => item.fullName}
                                     shouldItemRender={item => item.fullName}
                                     renderMenu={item => (
                                         <div className="dropdown">
@@ -43,16 +43,41 @@ export default class App extends Component {
                                     onChange={(_event, val) => this.setState({ selectedMemberId: val })}
                                     onSelect={val => { this.setState({ selectedMemberId: val }); }}
                                 />
-                            </div>                            
-                            <button onClick={() => this.doSomething(this.state.selectedMemberId)}>GO</button>
+                            </div>
+                            <div className="autocomplete-wrapper">
+                                <h3>Select a group for which to add this member:</h3>
+                                <Autocomplete
+                                    value={this.state.selectedGroupId}
+                                    items={this.state.dashboardData.thinkGroups}
+                                    getItemValue={item => item.thinkGroupId.toString()}
+                                    getOptionSelected={item => item.name}
+                                    shouldItemRender={item => item.name}
+                                    renderMenu={item => (
+                                        <div className="dropdown">
+                                            {item}
+                                        </div>
+                                    )}
+                                    renderItem={(item, isHighlighted) =>
+                                        <div key={item.thinkGroupId} className={`item ${isHighlighted ? 'selected-item' : ''}`}>
+                                            {item.name}
+                                        </div>
+                                    }
+                                    onChange={(_event, val) => this.setState({ selectedGroupId: val })}
+                                    onSelect={val => { this.setState({ selectedGroupId: val }); }}
+                                />
+                            </div>
+                            <button onClick={() => this.doSomething(this.state.selectedMemberId, this.state.selectedGroupId)}>GO</button>
                         </>
                 }
             </>
         );
     }
 
-    doSomething(value) {
-        alert(value);
+    doSomething(memberId, thinkGroupId) {
+        fetch('dashboard?' + new URLSearchParams({ memberId, thinkGroupId }), {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },            
+        });
     }
 
     renderDashboard(dashboard) {
