@@ -16,8 +16,8 @@ namespace Morphware.Telepath.Core
 
         public string Email { get; set; }
 
-        public virtual ICollection<ThinkGroup> ThinkGroups { get; set; }
+        public virtual ICollection<ThinkGroup> ThinkGroups { get; set; } = new List<ThinkGroup>();
 
-        public virtual ICollection<Thought> Thoughts { get; set; }
+        public virtual ICollection<Thought> Thoughts { get; set; } = new List<Thought>();
     }
 }
