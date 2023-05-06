@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Autocomplete from 'react-autocomplete';
+import TextField from '@material-ui/core/TextField';
 
 export default class App extends Component {
     state = {
@@ -28,7 +29,8 @@ export default class App extends Component {
                                     value={this.state.selectedMemberId}
                                     items={this.state.dashboardData.members}
                                     getItemValue={item => item.memberId.toString()}
-                                    getOptionSelected={item => item.fullName}
+                                    getOptionLabel={item => item.fullName}
+                                    getOptionSelected={item => item.memberId}
                                     shouldItemRender={item => item.fullName}
                                     renderMenu={item => (
                                         <div className="dropdown">
@@ -50,7 +52,8 @@ export default class App extends Component {
                                     value={this.state.selectedGroupId}
                                     items={this.state.dashboardData.thinkGroups}
                                     getItemValue={item => item.thinkGroupId.toString()}
-                                    getOptionSelected={item => item.name}
+                                    getOptionSelected={item => item.thinkGroupId}
+                                    getOptionLabel={item => item.name}
                                     shouldItemRender={item => item.name}
                                     renderMenu={item => (
                                         <div className="dropdown">
@@ -58,10 +61,18 @@ export default class App extends Component {
                                         </div>
                                     )}
                                     renderItem={(item, isHighlighted) =>
-                                        <div key={item.thinkGroupId} className={`item ${isHighlighted ? 'selected-item' : ''}`}>
+                                        <div key={item.name} className={`item ${isHighlighted ? 'selected-item' : ''}`}>
                                             {item.name}
                                         </div>
                                     }
+                                    renderTags={(val, getTagsProps, ownerState) =>
+                                        <div className="selectedThinkGroup">
+                                            hi
+                                        </div>
+                                        }
+                                    renderInput={params => (
+                                        <TextField {...params} label="Label" variant="outlined" fullWidth />
+                                    )}
                                     onChange={(_event, val) => this.setState({ selectedGroupId: val })}
                                     onSelect={val => { this.setState({ selectedGroupId: val }); }}
                                 />
@@ -76,7 +87,7 @@ export default class App extends Component {
     doSomething(memberId, thinkGroupId) {
         fetch('dashboard?' + new URLSearchParams({ memberId, thinkGroupId }), {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },            
+            headers: { 'Content-Type': 'application/json' },
         });
     }
 
