@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Autocomplete from 'react-autocomplete';
+import InputBase from '@mui/material/InputBase';
 import TextField from '@material-ui/core/TextField';
 
 export default class App extends Component {
@@ -71,7 +72,7 @@ export default class App extends Component {
                                         </div>
                                         }
                                     renderInput={params => (
-                                        <TextField {...params} label="Label" variant="outlined" fullWidth />
+                                        <TextField {...params} label="Something" />
                                     )}
                                     onChange={(_event, val) => this.setState({ selectedGroupId: val })}
                                     onSelect={val => { this.setState({ selectedGroupId: val }); }}
