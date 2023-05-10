@@ -5,8 +5,19 @@ import TextField from '@material-ui/core/TextField';
 
 export default class App extends Component {
     state = {
-        selectedMemberId: '', selectedGroupId: '', dashboardData: {}, loading: true
+        selectedMemberId: '', selectedGroupId: '', selectedGroupName: '', dashboardData: {}, loading: true
     };
+
+    updateSelectedGroupName() {
+        if (this.state.dashboardData && this.state.selectedGroupId) {
+            
+            var selectedGroup = this.state.dashboardData.thinkGroups.find(element => {
+                return element.thinkGroupId == this.state.selectedGroupId;
+            });
+
+            this.setState({selectedGroupName: selectedGroup.name})            
+        }
+    }
 
     componentDidMount() {
         fetch('dashboard')
@@ -50,7 +61,7 @@ export default class App extends Component {
                             <div className="autocomplete-wrapper">
                                 <h3>Select a group for which to add this member:</h3>
                                 <Autocomplete
-                                    value={this.state.selectedGroupId}
+                                    value={this.state.selectedGroupName}
                                     items={this.state.dashboardData.thinkGroups}
                                     getItemValue={item => item.thinkGroupId.toString()}
                                     getOptionSelected={item => item.thinkGroupId}
@@ -75,7 +86,10 @@ export default class App extends Component {
                                         <TextField {...params} label="Something" />
                                     )}
                                     onChange={(_event, val) => this.setState({ selectedGroupId: val })}
-                                    onSelect={val => { this.setState({ selectedGroupId: val }); }}
+                                    onSelect={val => {
+                                        this.setState({ selectedGroupId: val });
+                                        this.updateSelectedGroupName();
+                                    }}
                                 />
                             </div>
                             <button onClick={() => this.doSomething(this.state.selectedMemberId, this.state.selectedGroupId)}>GO</button>
