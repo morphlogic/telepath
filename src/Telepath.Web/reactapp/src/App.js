@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Autocomplete from 'react-autocomplete';
-import InputBase from '@mui/material/InputBase';
 import TextField from '@material-ui/core/TextField';
 
 export default class App extends Component {
@@ -76,14 +75,9 @@ export default class App extends Component {
                                         <div key={item.name} className={`item ${isHighlighted ? 'selected-item' : ''}`}>
                                             {item.name}
                                         </div>
-                                    }
-                                    renderTags={(val, getTagsProps, ownerState) =>
-                                        <div className="selectedThinkGroup">
-                                            hi
-                                        </div>
-                                    }
+                                    }                                    
                                     renderInput={params => (
-                                        <TextField {...params} label="Something" />
+                                        <TextField {...params} label="Select a group" />
                                     )}
                                     onChange={(_event, val) => this.setState({ selectedGroupId: val })}
                                     onSelect={val => this.updateSelectedGroup(val)}
