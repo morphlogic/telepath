@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import Autocomplete from 'react-autocomplete';
 import TextField from '@material-ui/core/TextField';
 
-export default class App extends Component {
+class MemberGroupAssociation extends Component {
     state = {
         selectedMemberId: '', selectedGroupId: '', selectedGroupName: '', dashboardData: {}, loading: true
     };
 
     updateSelectedGroup(id) {
         if (id && this.state.dashboardData) {
-            
+
             var selectedGroup = this.state.dashboardData.thinkGroups.find(element => {
                 return element.thinkGroupId == id;
             });
 
-            this.setState({selectedGroupId: id, selectedGroupName: selectedGroup.name})
+            this.setState({ selectedGroupId: id, selectedGroupName: selectedGroup.name })
         }
     }
 
@@ -75,7 +75,7 @@ export default class App extends Component {
                                         <div key={item.name} className={`item ${isHighlighted ? 'selected-item' : ''}`}>
                                             {item.name}
                                         </div>
-                                    }                                    
+                                    }
                                     renderInput={params => (
                                         <TextField {...params} label="Select a group" />
                                     )}
@@ -100,5 +100,14 @@ export default class App extends Component {
     renderDashboard(dashboard) {
 
         console.log(dashboard);
-    }  
+    }
+}
+export default class App extends Component {
+    render() {
+        return (
+            <>
+                <MemberGroupAssociation />
+            </>
+        );
+    }
 }
