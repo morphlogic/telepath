@@ -4,17 +4,26 @@ import TextField from '@material-ui/core/TextField';
 
 class MemberGroupAssociation extends Component {
     state = {
-        selectedMemberId: '', selectedGroupId: '', selectedGroupName: '', dashboardData: {}, loading: true
+        selectedMemberId: '', selectedMemberName: '', selectedGroupId: '', selectedGroupName: '',dashboardData: {}, loading: true
     };
+
+    updateSelectedMember(id) {
+        if (id && this.state.dashboardData) {
+            var selectedMember = this.state.dashboardData.members.find(element => {
+                return element.memberId == id;
+            });
+
+            this.setState({ selectedMemberId: id, selectedMemberName: selectedMember.fullName });
+        }
+    }
 
     updateSelectedGroup(id) {
         if (id && this.state.dashboardData) {
-
             var selectedGroup = this.state.dashboardData.thinkGroups.find(element => {
                 return element.thinkGroupId == id;
             });
 
-            this.setState({ selectedGroupId: id, selectedGroupName: selectedGroup.name })
+            this.setState({ selectedGroupId: id, selectedGroupName: selectedGroup.name });
         }
     }
 
@@ -37,7 +46,7 @@ class MemberGroupAssociation extends Component {
                             <div className="autocomplete-wrapper">
                                 <h3>Select a member to add to a group:</h3>
                                 <Autocomplete
-                                    value={this.state.selectedMemberId}
+                                    value={this.state.selectedMemberName}
                                     items={this.state.dashboardData.members}
                                     getItemValue={item => item.memberId.toString()}
                                     getOptionLabel={item => item.fullName}
@@ -54,7 +63,7 @@ class MemberGroupAssociation extends Component {
                                         </div>
                                     }
                                     onChange={(_event, val) => this.setState({ selectedMemberId: val })}
-                                    onSelect={val => { this.setState({ selectedMemberId: val }); }}
+                                    onSelect={val => { this.updateSelectedMember(val); }}
                                 />
                             </div>
                             <div className="autocomplete-wrapper">
