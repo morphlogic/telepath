@@ -62,6 +62,9 @@ class MemberGroupAssociation extends Component {
                                             {item.fullName}
                                         </div>
                                     }
+                                    renderInput={params => (
+                                        <TextField {...params} label="Select a member" />
+                                    )}
                                     onChange={(_event, val) => this.setState({ selectedMemberId: val })}
                                     onSelect={val => { this.updateSelectedMember(val); }}
                                 />
