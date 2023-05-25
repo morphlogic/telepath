@@ -23,5 +23,9 @@ namespace Morphware.Telepath.Core
         public DateTime? End { get; set; }
 
         public virtual ICollection<Thought> Thoughts { get; set; } = new List<Thought>();
+
+        public virtual ThinkGroup? ThinkGroup { get; set; }
+
+        public virtual Topic? Topic { get; set; }
     }
 }
