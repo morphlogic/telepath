@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Autocomplete from 'react-autocomplete';
 import TextField from '@material-ui/core/TextField';
+import styled from 'styled-components';
 
 export default class MemberGroupAssociation extends Component {
     state = {
@@ -36,6 +37,15 @@ export default class MemberGroupAssociation extends Component {
     }
 
     render() {
+        const Button = styled.button`
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  padding: 10px 60px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  cursor: pointer;
+`;
         return (
             <>
                 {
@@ -95,7 +105,7 @@ export default class MemberGroupAssociation extends Component {
                                     onSelect={val => this.updateSelectedGroup(val)}
                                 />
                             </div>
-                            <button onClick={() => this.doSomething(this.state.selectedMemberId, this.state.selectedGroupId)}>GO</button>
+                            <Button onClick={() => this.doSomething(this.state.selectedMemberId, this.state.selectedGroupId)}>GO</Button>
                         </>
                 }
             </>
